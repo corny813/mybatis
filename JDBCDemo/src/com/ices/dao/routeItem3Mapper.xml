@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xbrother.dao.RI3Mapper">
+
+	<!-- 查询 -->
+	<select id="queryIPByID" parameterType="int"
+		resultType="RouteItem3">
+		select * from router where id=#{id}
+	</select>
+
+	<select id="queryIPByGUID" parameterType="String"
+		resultType="RouteItem3">
+		select * from router where guid=#{guid}
+	</select>
+	
+	<select id="queryAllIPByGUID" parameterType="String"
+		resultType="RouteItem3">
+		select * from router where guid=#{guid}
+	</select>
+	
+	<select id="queryAllNextIPByGUID" parameterType="String"
+		resultType="RouteItem3">
+		select * from router where guid=#{guid}
+	</select>
+
+	<select id="queryAllItem" resultType="RouteItem3">
+		select * from router
+	</select>
+	
+	<select id="queryAllItemByGUID" parameterType="String"
+	    resultType="RouteItem3">
+		select * from router where guid=#{guid}
+	</select>
+
+
+	<!-- 插入 -->
+	<insert id="insertItem" parameterType="RouteItem3"
+		keyProperty="id" useGeneratedKeys="true">
+		insert into router(guid,ip,nextIP,cost)
+		values(#{guid},#{ip},#{nextIP},#{cost})
+	</insert>
+	
+
+	<!-- 更新 -->
+	<update id="updateIP" parameterType="RouteItem3">
+	    update router set ip=#{ip} where guid=#{guid} and nextIP=#{nextIP}
+	</update>
+	
+	<update id="updateIPByGUID" parameterType="RouteItem3">
+	    update router set ip=#{ip} where guid=#{guid}
+	</update>
+	
+	<update id="updateGUID" parameterType="RouteItem3">
+	    update router set guid=#{guid} where ip=#{ip} and nextIP=#{nextIP}
+	</update>
+	
+	<update id="updateNextIP" parameterType="RouteItem3">
+	    update router set nextIP=#{nextIP} where guid=#{guid} and ip=#{ip}
+	</update>
+	
+	<update id="updateNextIPByGUID" parameterType="RouteItem3">
+	    update router set nextIP=#{nextIP} where guid=#{guid}
+	</update>
+	
+</mapper>

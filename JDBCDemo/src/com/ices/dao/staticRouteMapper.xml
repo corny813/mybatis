@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xbrother.dao.SRMapper">
+
+	<!-- 查询 -->
+	<select id="queryIPByID" parameterType="int"
+		resultType="StaticRoute">
+		select * from srouter where id=#{id}
+	</select>
+
+	<select id="queryIPByGUID" parameterType="String"
+		resultType="StaticRoute">
+		select * from srouter where guid=#{guid}
+	</select>
+	
+	<select id="queryProxyIPByGUID" parameterType="String"
+		resultType="StaticRoute">
+		select * from srouter where guid=#{guid}
+	</select>
+
+	<select id="queryAllItem" resultType="StaticRoute">
+		select * from srouter
+	</select>
+	
+	<select id="queryAllItemByGUID" parameterType="String" 
+	    resultType="StaticRoute">
+		select * from srouter where guid=#{guid}
+	</select>
+
+
+	<!-- 插入 -->
+	<insert id="insertItem" parameterType="StaticRoute"
+		keyProperty="id" useGeneratedKeys="true">
+		insert into srouter(guid,ip,proxyIP)
+		values(#{guid},#{ip},#{proxyIP})
+	</insert>
+
+
+	<!-- 更新 -->
+	<update id="updateIP" parameterType="StaticRoute">
+	    update srouter set ip=#{ip} where guid=#{guid} and proxyIP=#{proxyIP}
+	</update>
+	
+	<update id="updateIPByGUID" parameterType="StaticRoute">
+	    update srouter set ip=#{ip} where guid=#{guid}
+	</update>
+	
+	<update id="updateProxyIP" parameterType="StaticRoute">
+	    update srouter set proxyIP=#{proxyIP} where guid=#{guid} and ip=#{ip}
+	</update>
+	
+	<update id="updateProxyIPByGUID" parameterType="StaticRoute">
+	    update srouter set proxyIP=#{proxyIP} where guid=#{guid}
+	</update>
+	
+	<update id="updateGUID" parameterType="StaticRoute">
+	    update srouter set guid=#{guid} where ip=#{ip} and proxyIP=#{proxyIP}
+	</update>
+
+</mapper>
